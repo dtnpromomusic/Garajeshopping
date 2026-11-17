@@ -42,7 +42,7 @@ function setCartOpen(open) {
   document.body.classList.toggle("cart-open", open);
   drawer.setAttribute("aria-hidden", String(!open));
 }
-$("#open-cart").addEventListener("click", () => setCartOpen(true));
+$("#open-cart").addEventListener("click", () => setCartOpen(true));\n$("#floating-cart").addEventListener("click", () => setCartOpen(true));
 $("#close-cart").addEventListener("click", () => setCartOpen(false));
 $("#drawer-backdrop").addEventListener("click", () => setCartOpen(false));
 $("#year").textContent = new Date().getFullYear();
@@ -131,7 +131,7 @@ function changeQuantity(id, delta) {
 }
 function renderCart() {
   const count = cart.reduce((sum,row) => sum + row.quantity, 0);
-  $("#cart-count").textContent = count;
+  $("#cart-count").textContent = count;\n  $("#floating-cart-count").textContent = count;
   const lines = cart.map(row => {
     const product = products.find(item => item.id === row.id);
     return product ? {product,quantity:row.quantity} : null;
