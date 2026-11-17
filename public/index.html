@@ -72,8 +72,9 @@
 
     <section class="feature-band"><div class="feature-image"><img src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=1200&q=85" alt="Interior con muebles y objetos de diseño"></div><div class="feature-copy"><span class="eyebrow">NO SIGAS A LA MULTITUD</span><h2>Tu espacio.<br>Tu historia.<br><em>Tus reglas.</em></h2><p>Desde esa pieza que completa tu sala hasta ese objeto raro que llevabas tiempo buscando.</p><a href="#categorias" class="text-link">Encuentra algo tuyo <span>↗</span></a></div><span class="feature-scribble">BE<br>DIFFERENT</span></section>
 
-    <section class="selection-section section-wrap" id="seleccion">
-      <div class="section-heading"><div><span class="eyebrow">EL DESCUBRIMIENTO EMPIEZA AQUÍ</span><h2 id="selection-title">Selección de categoría</h2><p class="section-intro">Explora los artículos disponibles en esta categoría.</p><a class="back-categories" href="#categorias">← Volver a las categorías</a></div><span class="heading-aside">PRIMERA EDICIÓN<br>EN PREPARACIÓN</span></div>
+    <div class="category-panel-backdrop" id="category-panel-backdrop"></div>
+    <section class="selection-section category-panel" id="seleccion" aria-label="Artículos de la categoría" aria-hidden="true">
+      <div class="section-heading"><div><span class="eyebrow">EL DESCUBRIMIENTO EMPIEZA AQUÍ</span><h2 id="selection-title">Todas las categorías</h2><p class="section-intro">Explora los artículos disponibles en esta categoría.</p></div><button class="category-panel-close" id="close-category-panel" type="button" aria-label="Cerrar categorías">×</button></div>
       <div class="category-results">
           <div class="catalog-toolbar"><nav class="filter-pills" id="filters" aria-label="Cambiar categoría">
             <button class="filter active" type="button" data-filter="Todos">Todas</button>
