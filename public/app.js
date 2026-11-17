@@ -3,6 +3,8 @@ const drawer = $("#cart-drawer");
 const filters = [...document.querySelectorAll(".filter")];
 const tiles = [...document.querySelectorAll(".category-tile")];
 const productGrid = $("#product-grid");
+const selectionSection = $("#seleccion");
+const selectionTitle = $("#selection-title");
 const emptyCatalog = $("#empty-catalog");
 const search = $("#site-search");
 const CART_KEY = "garaje-shopping-cart-v1";
@@ -46,10 +48,11 @@ $("#year").textContent = new Date().getFullYear();
 
 function selectCategory(category, scroll = false) {
   activeCategory = category;
+  selectionSection.hidden = category === "Todos";
   filters.forEach(button => button.classList.toggle("active", button.dataset.filter === category));
-  tiles.forEach(tile => { tile.hidden = category !== "Todos" && tile.dataset.category !== category; });
+  if (category !== "Todos") selectionTitle.textContent = category;
   renderProducts();
-  if (scroll) $("#seleccion").scrollIntoView({behavior:"smooth",block:"start"});
+  if (scroll && category !== "Todos") selectionSection.scrollIntoView({behavior:"smooth",block:"start"});
 }
 function renderProducts() {
   const visible = products.filter(product => activeCategory === "Todos" || product.category === activeCategory);
@@ -67,8 +70,8 @@ function renderProducts() {
       </div>
     </article>`).join("");
   emptyCatalog.hidden = visible.length > 0;
-  if (visible.length) $(".section-intro").textContent = "Artículos disponibles en esta selección. Pulsa una ficha para ver sus detalles.";
-  else $(".section-intro").textContent = "Estamos preparando la primera selección de artículos. Vuelve pronto para descubrir las piezas disponibles.";
+  if (visible.length) $(".section-intro").textContent = "Artículos disponibles en esta categoría. Pulsa una ficha para ver sus detalles.";
+  else $(".section-intro").textContent = "Estamos preparando artículos para esta categoría. Próximamente encontrarás aquí nuevas piezas.";
 }
 filters.forEach(button => button.addEventListener("click", () => selectCategory(button.dataset.filter)));
 tiles.forEach(tile => tile.addEventListener("click", () => {
@@ -82,8 +85,8 @@ search.addEventListener("input", () => {
   if (match) selectCategory(match.dataset.category, true);
   else {
     activeCategory = "Todos";
+    selectionSection.hidden = true;
     filters.forEach(button => button.classList.toggle("active", button.dataset.filter === "Todos"));
-    tiles.forEach(tile => { tile.hidden = true; });
     renderProducts();
   }
 });
@@ -170,5 +173,6 @@ document.addEventListener("keydown", event => {
     $("#product-detail-backdrop").setAttribute("aria-hidden","true");
   }
 });
+selectionSection.hidden = true;
 renderProducts();
 renderCart();
