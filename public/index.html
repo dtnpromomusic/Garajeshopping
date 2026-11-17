@@ -43,7 +43,24 @@
 
     <section class="category-section section-wrap" id="categorias">
       <div class="section-heading"><div><span class="eyebrow">RECORRE NUESTROS PASILLOS</span><h2>¿Qué te gustaría encontrar?</h2></div><span class="heading-aside">NUEVE CATEGORÍAS.<br>MILES DE POSIBILIDADES.</span></div>
-      <div class="category-grid">
+      <div class="category-home-layout">
+        <aside class="category-sidebar" aria-label="Categorías del catálogo">
+          <span class="sidebar-eyebrow">EXPLORAR</span>
+          <h3>Categorías</h3>
+          <nav class="sidebar-category-list">
+            <button class="sidebar-category active" data-sidebar-category="Todos"><span>✳</span> Todas las categorías</button>
+            <button class="sidebar-category" data-sidebar-category="Muebles"><span>01</span> Muebles</button>
+            <button class="sidebar-category" data-sidebar-category="Ropa vintage"><span>02</span> Ropa vintage</button>
+            <button class="sidebar-category" data-sidebar-category="Curiosidades"><span>03</span> Curiosidades</button>
+            <button class="sidebar-category" data-sidebar-category="Coleccionables"><span>04</span> Coleccionables</button>
+            <button class="sidebar-category" data-sidebar-category="Decoración e iluminación"><span>05</span> Decoración e iluminación</button>
+            <button class="sidebar-category" data-sidebar-category="Herramientas"><span>06</span> Herramientas</button>
+            <button class="sidebar-category" data-sidebar-category="Pieza única"><span>07</span> Pieza única</button>
+            <button class="sidebar-category" data-sidebar-category="Juguetes"><span>08</span> Juguetes</button>
+            <button class="sidebar-category" data-sidebar-category="Retro"><span>09</span> Retro</button>
+          </nav>
+        </aside>
+        <div class="category-grid">
         <a class="category-tile cat-furniture" href="#seleccion" data-category="Muebles"><img src="https://images.unsplash.com/photo-1503602642458-232111445657?auto=format&fit=crop&w=850&q=80" alt="Silla de diseño"><span class="tile-number">01 / ESPACIOS</span><b>Muebles</b><span class="tile-arrow">↗</span></a>
         <a class="category-tile cat-vintage" href="#seleccion" data-category="Ropa vintage"><img src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=850&q=80" alt="Ropa y accesorios"><span class="tile-number">02 / ESTILO</span><b>Ropa vintage</b><span class="tile-arrow">↗</span></a>
         <a class="category-tile cat-unique" href="#seleccion" data-category="Curiosidades"><img src="https://images.unsplash.com/photo-1490312278390-ab64016e0aa9?auto=format&fit=crop&w=850&q=80" alt="Objeto decorativo singular"><span class="tile-number">03 / CURIOSIDADES</span><b>Curiosidades</b><span class="tile-arrow">↗</span></a>
@@ -53,6 +70,7 @@
         <a class="category-tile cat-oneoff" href="#seleccion" data-category="Pieza única"><img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=850&q=80" alt="Calzado deportivo de edición individual"><span class="tile-number">07 / SOLO UNA</span><b>Pieza única</b><span class="tile-arrow">↗</span></a>
         <a class="category-tile cat-toys" href="#seleccion" data-category="Juguetes"><img src="https://images.unsplash.com/photo-1558060370-d644479cb6f7?auto=format&fit=crop&w=850&q=80" alt="Juguetes y figuras para jugar"><span class="tile-number">08 / DIVERSIÓN</span><b>Juguetes</b><span class="tile-arrow">↗</span></a>
         <a class="category-tile cat-retro" href="#seleccion" data-category="Retro"><img src="https://images.unsplash.com/photo-1461360228754-6e81c478b882?auto=format&fit=crop&w=850&q=80" alt="Objetos y decoración de estilo retro"><span class="tile-number">09 / OTRA ÉPOCA</span><b>Retro</b><span class="tile-arrow">↗</span></a>
+        </div>
       </div>
     </section>
 
@@ -60,28 +78,10 @@
 
     <section class="selection-section section-wrap" id="seleccion">
       <div class="section-heading"><div><span class="eyebrow">EL DESCUBRIMIENTO EMPIEZA AQUÍ</span><h2 id="selection-title">Selección de categoría</h2><p class="section-intro">Explora los artículos disponibles en esta categoría.</p><a class="back-categories" href="#categorias">← Volver a las categorías</a></div><span class="heading-aside">PRIMERA EDICIÓN<br>EN PREPARACIÓN</span></div>
-      <div class="category-browser">
-        <aside class="category-sidebar" aria-label="Categorías del catálogo">
-          <span class="sidebar-eyebrow">EXPLORAR</span>
-          <h3>Categorías</h3>
-          <nav class="sidebar-category-list">
-            <button class="sidebar-category active" data-sidebar-category="Todos"><span>✳</span> Todas las categorías</button>
-            <button class="sidebar-category" data-sidebar-category="Muebles"><span>01</span> Muebles</button>
-            <button class="sidebar-category" data-sidebar-category="Ropa vintage"><span>02</span> Ropa vintage</button>
-            <button class="sidebar-category" data-sidebar-category="Artículos únicos"><span>03</span> Curiosidades</button>
-            <button class="sidebar-category" data-sidebar-category="Coleccionables"><span>04</span> Coleccionables</button>
-            <button class="sidebar-category" data-sidebar-category="Decoración e iluminación"><span>05</span> Decoración e iluminación</button>
-            <button class="sidebar-category" data-sidebar-category="Herramientas"><span>06</span> Herramientas</button>
-            <button class="sidebar-category" data-sidebar-category="Pieza única"><span>07</span> Pieza única</button>
-            <button class="sidebar-category" data-sidebar-category="Juguetes"><span>08</span> Juguetes</button>
-            <button class="sidebar-category" data-sidebar-category="Retro"><span>09</span> Retro</button>
-          </nav>
-        </aside>
-        <div class="category-results">
+      <div class="category-results">
           <div class="catalog-toolbar"><div class="filter-pills" id="filters" hidden></div><span class="catalog-status">CATÁLOGO EN PREPARACIÓN</span></div>
           <div id="product-grid" class="product-grid" aria-live="polite"></div><div class="empty-catalog" id="empty-catalog"><div class="empty-art">✳</div><div><span class="eyebrow">ESTAMOS PREPARANDO ALGO BUENO</span><h3>El próximo hallazgo puede ser tuyo.</h3><p>Estamos seleccionando artículos para inaugurar GARAJE SHOPPING.</p></div><span class="empty-side-note">COMING<br>SOON ↗</span></div>
         </div>
-      </div>
     </section>
 
     <section class="how-section" id="como-comprar"><div class="section-wrap how-inner"><div><span class="eyebrow">SIN CUENTAS. SIN VUELTAS.</span><h2>Encontrar. Elegir.<br><em>Y listo.</em></h2><p>Queremos que comprar sea tan fácil como descubrir algo que te encanta.</p></div><div class="steps"><div><span>01</span><b>Descubre</b><small>Explora artículos y encuentra tu favorito.</small></div><div><span>02</span><b>Arma tu bolsa</b><small>Añade lo que quieras y revisa tu selección.</small></div><div><span>03</span><b>Confirma tu pedido</b><small>Completa tus datos y dirección, sin crear una cuenta.</small></div></div></div></section>
