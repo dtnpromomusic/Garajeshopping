@@ -134,8 +134,9 @@ function renderProducts() {
       </button>
       <div class="product-info">
         <span class="product-category">${product.categoryLabel || product.category}</span>
-        <span class="stock-tag">HALLAZGO GARAJE</span>
+        <span class="stock-tag">${product.unique ? "PIEZA ÚNICA · 1 DISPONIBLE" : product.stock !== null ? product.stock + " DISPONIBLES" : "DISPONIBILIDAD POR CONFIRMAR"}</span>
         <h3>${product.name}</h3>
+        ${(product.condition || product.size || product.measurements) ? `<div class="product-meta">${[product.condition ? "Estado: " + product.condition : "", product.size ? "Talla: " + product.size : "", product.measurements ? "Medidas: " + product.measurements : ""].filter(Boolean).join(" · ")}</div>` : ""}
         <div class="product-price">${money(product.price)}</div>
         <div class="product-actions"><button class="view-product" data-view="${product.id}">Ver más</button><button class="add-product" data-add="${product.id}">Añadir al carrito</button></div>
       </div>
@@ -289,9 +290,15 @@ function showProduct(id) {
   $("#product-detail-content").innerHTML = `
     <span class="eyebrow">${product.category.toUpperCase()}</span>
     <h3>${product.name}</h3>
-    <img class="detail-product-image" src="${product.image}" alt="Fotografía real del calzado deportivo">
-    <span class="stock-tag">HALLAZGO GARAJE</span>
-    ${product.condition || product.size ? `<p>${product.condition ? "Estado: <b>" + product.condition + "</b><br>" : ""}${product.size ? "Talla: <b>" + product.size + "</b>" : ""}</p>` : ""}
+    <img class="detail-product-image" src="${product.image}" alt="${product.name}. Selecciona la imagen para ampliarla" title="Pulsa para ampliar la fotografía">
+    <span class="stock-tag">${product.unique ? "PIEZA ÚNICA · 1 DISPONIBLE" : product.stock !== null ? product.stock + " DISPONIBLES" : "DISPONIBILIDAD POR CONFIRMAR"}</span>
+    <div class="detail-facts">
+      ${product.condition ? `<div><small>Estado de conservación</small><strong>${product.condition}</strong></div>` : ""}
+      ${product.size ? `<div><small>Talla</small><strong>${product.size}</strong></div>` : ""}
+      ${product.measurements ? `<div><small>Medidas</small><strong>${product.measurements}</strong></div>` : ""}
+      ${product.material ? `<div><small>Material</small><strong>${product.material}</strong></div>` : ""}
+      <div><small>Disponibilidad</small><strong>${product.stock === null ? "Por confirmar" : product.stock + (product.stock === 1 ? " unidad disponible" : " unidades disponibles")}</strong></div>
+    </div>
     <p>${product.description}</p>
     <strong class="product-price">${money(product.price)}</strong>
     <button class="add-product" data-add-detail="${product.id}">Añadir a mi bolsa</button>`;
@@ -299,12 +306,17 @@ function showProduct(id) {
   detail.setAttribute("aria-hidden","false");
 }
 $("#product-detail-backdrop").addEventListener("click", event => {
+  const zoomedImage = $("#product-detail-content .detail-product-image.image-zoomed");
+  if (zoomedImage && event.target === zoomedImage) { zoomedImage.classList.remove("image-zoomed"); return; }
   if (event.target.id === "product-detail-backdrop" || event.target.closest(".product-detail-close")) {
+    $("#product-detail-content .detail-product-image")?.classList.remove("image-zoomed");
     $("#product-detail-backdrop").classList.remove("open");
     $("#product-detail-backdrop").setAttribute("aria-hidden","true");
   }
 });
 $("#product-detail-content").addEventListener("click", event => {
+  const image = event.target.closest(".detail-product-image");
+  if (image) { image.classList.toggle("image-zoomed"); return; }
   const button = event.target.closest("[data-add-detail]");
   if (button) { $("#product-detail-backdrop").classList.remove("open"); addToCart(button.dataset.addDetail); }
 });
