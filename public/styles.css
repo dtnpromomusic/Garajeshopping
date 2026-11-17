@@ -291,3 +291,10 @@
 .detail-facts strong{font-size:12px;line-height:1.4;color:var(--ink);overflow-wrap:anywhere}
 .product-meta{padding-top:2px}
 @media(max-width:520px){.product-detail{padding:18px;max-height:94vh}.product-detail h3{font-size:22px}.detail-facts{gap:7px}.detail-facts>div{padding:9px}.detail-facts strong{font-size:11px}}
+
+
+/* Icono SVG único para la bolsa del encabezado y el acceso flotante */
+.bag-g-icon{display:block;width:25px;height:25px;flex:0 0 auto;color:currentColor}
+.cart-icon{display:inline-flex;align-items:center;justify-content:center}
+.floating-cart-icon{display:flex;align-items:center;justify-content:center}
+.floating-cart-icon .bag-g-icon{width:30px;height:30px}
