@@ -75,7 +75,18 @@
     <section class="selection-section section-wrap" id="seleccion">
       <div class="section-heading"><div><span class="eyebrow">EL DESCUBRIMIENTO EMPIEZA AQUÍ</span><h2 id="selection-title">Selección de categoría</h2><p class="section-intro">Explora los artículos disponibles en esta categoría.</p><a class="back-categories" href="#categorias">← Volver a las categorías</a></div><span class="heading-aside">PRIMERA EDICIÓN<br>EN PREPARACIÓN</span></div>
       <div class="category-results">
-          <div class="catalog-toolbar"><div class="filter-pills" id="filters" hidden></div><span class="catalog-status">CATÁLOGO EN PREPARACIÓN</span></div>
+          <div class="catalog-toolbar"><nav class="filter-pills" id="filters" aria-label="Cambiar categoría">
+            <button class="filter active" type="button" data-filter="Todos">Todas</button>
+            <button class="filter" type="button" data-filter="Muebles">Muebles</button>
+            <button class="filter" type="button" data-filter="Ropa vintage">Ropa vintage</button>
+            <button class="filter" type="button" data-filter="Curiosidades">Curiosidades</button>
+            <button class="filter" type="button" data-filter="Coleccionables">Coleccionables</button>
+            <button class="filter" type="button" data-filter="Decoración e iluminación">Decoración</button>
+            <button class="filter" type="button" data-filter="Herramientas">Herramientas</button>
+            <button class="filter" type="button" data-filter="Pieza única">Pieza única</button>
+            <button class="filter" type="button" data-filter="Juguetes">Juguetes</button>
+            <button class="filter" type="button" data-filter="Retro">Retro</button>
+          </nav><span class="catalog-status">CATÁLOGO EN PREPARACIÓN</span></div>
           <div id="product-grid" class="product-grid" aria-live="polite"></div><div class="empty-catalog" id="empty-catalog"><div class="empty-art">✳</div><div><span class="eyebrow">ESTAMOS PREPARANDO ALGO BUENO</span><h3>El próximo hallazgo puede ser tuyo.</h3><p>Estamos seleccionando artículos para inaugurar GARAJE SHOPPING.</p></div><span class="empty-side-note">COMING<br>SOON ↗</span></div>
         </div>
     </section>
