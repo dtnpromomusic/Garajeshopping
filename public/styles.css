@@ -303,3 +303,11 @@
 .bag-g-icon{overflow:visible;min-width:25px;min-height:25px}
 .cart-icon .bag-g-icon{width:27px;height:27px}
 .floating-cart-icon .bag-g-icon{width:34px;height:34px}
+
+
+/* Final bag icon correction: high-contrast, scalable SVG with a legible G */
+.cart-icon,.floating-cart-icon{color:inherit;line-height:0}
+svg.bag-g-icon{display:block!important;visibility:visible!important;opacity:1!important;overflow:visible!important;flex:none!important}
+.cart-icon svg.bag-g-icon{width:30px!important;height:30px!important}
+.floating-cart-icon svg.bag-g-icon{width:36px!important;height:36px!important}
+.bag-g-icon path{vector-effect:non-scaling-stroke}
