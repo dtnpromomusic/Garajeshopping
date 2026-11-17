@@ -87,3 +87,24 @@
 .category-panel .filter{font-size:11px}
 .category-panel .empty-catalog{padding:28px;min-height:190px}
 @media(max-width:680px){.category-panel{width:100vw;padding:24px 18px 35px}.category-panel .section-heading{gap:10px}.category-panel .section-heading h2{font-size:30px}.category-panel .filter{padding:8px 10px;font-size:10px}}
+
+/* Catálogo visual de productos */
+.category-panel .section-heading{align-items:center}
+.category-panel .section-intro{font-size:13px;margin:8px 0 0}
+.catalog-sort{display:flex;align-items:center;gap:9px;color:var(--muted);font-size:11px;font-weight:700}
+.catalog-sort select{appearance:none;border:1px solid var(--line);border-radius:7px;background:var(--white);color:var(--ink);padding:10px 32px 10px 12px;font:600 11px var(--body);cursor:pointer}
+.category-panel .product-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px;margin-top:20px}
+.category-panel .product-card{border:1px solid #e9e5dc;border-radius:10px;background:#fffefa;box-shadow:0 5px 18px #24252b08;transition:transform .2s,box-shadow .2s}
+.category-panel .product-card:hover{transform:translateY(-3px);box-shadow:0 12px 28px #24252b14}
+.category-panel .product-visual{height:210px;background:#f1efe9;cursor:pointer}
+.category-panel .product-visual img{object-fit:cover}
+.category-panel .product-info{padding:15px;gap:7px}
+.category-panel .product-category{font-size:10px;font-weight:800;color:var(--purple);letter-spacing:.04em}
+.category-panel .stock-tag{background:transparent;padding:0;color:#89858d;font-size:8px;letter-spacing:.13em}
+.category-panel .product-info h3{font:700 17px/1.2 var(--display);min-height:42px}
+.category-panel .product-price{font:700 20px var(--display);margin:4px 0 5px}
+.category-panel .product-actions{gap:7px;margin-top:5px}
+.category-panel .product-actions button{padding:11px 7px;font-size:10px}
+.category-panel .view-product{background:var(--paper);color:var(--ink);border:1px solid var(--line)}
+.category-panel .add-product{background:var(--purple);color:white}
+@media(max-width:520px){.category-panel .product-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.category-panel .product-visual{height:145px}.category-panel .product-info{padding:10px}.category-panel .product-info h3{font-size:14px;min-height:50px}.category-panel .product-price{font-size:17px}.category-panel .product-actions{flex-direction:column}.catalog-sort{width:100%;justify-content:space-between}}
