@@ -279,3 +279,15 @@
   box-shadow:none;
   cursor:not-allowed;
 }
+
+
+/* Fichas de producto: estado, medidas, disponibilidad y fotografía ampliable */
+.detail-product-image{cursor:zoom-in;transition:transform .2s,box-shadow .2s}
+.detail-product-image:hover{box-shadow:0 5px 20px #24252b18}
+.detail-product-image.image-zoomed{position:fixed;z-index:45;top:5vh;left:5vw;width:90vw;height:90vh;max-width:90vw;max-height:90vh;object-fit:contain;margin:0;background:#fff;border-radius:10px;box-shadow:0 12px 50px #17171b70;cursor:zoom-out}
+.detail-facts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin:14px 0}
+.detail-facts>div{display:flex;flex-direction:column;gap:5px;padding:11px 12px;border:1px solid var(--line);border-radius:8px;background:#f8f7f2;min-width:0}
+.detail-facts small{font-size:9px;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);font-weight:800}
+.detail-facts strong{font-size:12px;line-height:1.4;color:var(--ink);overflow-wrap:anywhere}
+.product-meta{padding-top:2px}
+@media(max-width:520px){.product-detail{padding:18px;max-height:94vh}.product-detail h3{font-size:22px}.detail-facts{gap:7px}.detail-facts>div{padding:9px}.detail-facts strong{font-size:11px}}
