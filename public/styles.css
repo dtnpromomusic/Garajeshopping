@@ -231,3 +231,27 @@
   color:#24252b !important;
   border-color:#ffffff !important;
 }
+
+
+/* Acción principal del checkout: Continuar con mis datos */
+#checkout-button.checkout-button{
+  background:#7157ef!important;
+  color:#fff!important;
+  border:1px solid #7157ef!important;
+  opacity:1!important;
+  box-shadow:0 7px 18px #7157ef35;
+  transition:background .2s,transform .2s,box-shadow .2s;
+}
+#checkout-button.checkout-button:not(:disabled):hover{
+  background:#5c42dc!important;
+  border-color:#5c42dc!important;
+  transform:translateY(-1px);
+  box-shadow:0 10px 22px #7157ef45;
+}
+#checkout-button.checkout-button:disabled{
+  background:#7157ef!important;
+  color:#fff!important;
+  opacity:.58!important;
+  box-shadow:none;
+  cursor:not-allowed;
+}
