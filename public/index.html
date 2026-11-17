@@ -97,7 +97,25 @@
   <footer><a class="brand" href="/"><span class="brand-symbol">g.</span><span class="brand-name">GARAJE<span>SHOPPING</span></span></a><span class="footer-line">Encuentra algo diferente. Hazlo tuyo.</span><small>© <span id="year"></span> GARAJE SHOPPING</small></footer>
 
   <button class="floating-cart" id="floating-cart" type="button" aria-label="Abrir mi bolsa shopping"><span class="floating-cart-icon" aria-hidden="true">🛍️</span><b id="floating-cart-count">0</b></button>\n  <div class="drawer-backdrop" id="drawer-backdrop"></div>
-  <aside class="cart-drawer" id="cart-drawer" aria-label="Mi bolsa shopping" aria-hidden="true"><div class="drawer-head"><div><span class="eyebrow">TU SELECCIÓN</span><h2>Mi bolsa shopping</h2></div><button id="close-cart" class="icon-button" aria-label="Cerrar bolsa">×</button></div><div id="cart-items" class="cart-items"><p class="cart-empty">Tu bolsa está esperando un buen hallazgo.</p></div><div class="drawer-foot"><div class="total-line"><span>Subtotal</span><b id="cart-total">RD$ 0.00</b></div><p>Tu bolsa se conserva en este dispositivo. La confirmación de pedidos se habilitará al conectar el registro seguro de órdenes.</p><button class="checkout-button" id="checkout-button" disabled>Confirmación de pedido próximamente</button></div></aside>
+  <aside class="cart-drawer" id="cart-drawer" aria-label="Mi bolsa shopping" aria-hidden="true"><div class="drawer-head"><div><span class="eyebrow">TU SELECCIÓN</span><h2>Mi bolsa shopping</h2></div><button id="close-cart" class="icon-button" aria-label="Cerrar bolsa">×</button></div><div id="cart-items" class="cart-items"><p class="cart-empty">Tu bolsa está esperando un buen hallazgo.</p></div><div class="drawer-foot"><div class="total-line"><span>Subtotal</span><b id="cart-total">RD$ 0.00</b></div><p>El envío se calcula aparte según tu dirección. Al confirmar, registraremos los artículos y tus datos para preparar el pedido.</p>
+    <button class="checkout-button" id="checkout-button" disabled>Continuar con mis datos</button>
+    <form class="checkout-form" id="checkout-form" hidden>
+      <label>Nombre completo<input name="name" type="text" minlength="2" maxlength="120" autocomplete="name" required placeholder="Tu nombre"></label>
+      <label>Teléfono de contacto<input name="phone" type="tel" minlength="7" maxlength="30" autocomplete="tel" required placeholder="809 000 0000"></label>
+      <label>Correo electrónico <small>(opcional)</small><input name="email" type="email" maxlength="254" autocomplete="email" placeholder="tucorreo@ejemplo.com"></label>
+      <label>Dirección de entrega<textarea name="address" minlength="8" maxlength="500" autocomplete="street-address" rows="3" required placeholder="Calle, número, sector, municipio y referencia"></textarea></label>
+      <label>Indicaciones adicionales <small>(opcional)</small><textarea name="notes" maxlength="1000" rows="2" placeholder="Detalles para localizarte"></textarea></label>
+      <div class="checkout-shipping-note">Pago contra entrega. El costo del envío se coordina por separado según la dirección.</div>
+      <button class="checkout-button" id="submit-order" type="submit">Confirmar pedido</button>
+      <button class="checkout-cancel" id="cancel-checkout" type="button">Volver a mi bolsa</button>
+      <p class="checkout-error" id="checkout-error" role="alert" hidden></p>
+    </form>
+    <div class="checkout-success" id="checkout-success" hidden>
+      <span class="success-mark">✓</span><h3>¡Pedido registrado!</h3>
+      <p>Tu código de pedido es:</p><strong id="order-code"></strong>
+      <p>Guarda este código. Nos pondremos en contacto para coordinar el envío.</p>
+      <button class="checkout-button" id="finish-order" type="button">Listo</button>
+    </div></div></aside>
   <div class="product-detail-backdrop" id="product-detail-backdrop" aria-hidden="true"><section class="product-detail" role="dialog" aria-modal="true" aria-labelledby="product-detail-title"><button class="product-detail-close" aria-label="Cerrar">×</button><div id="product-detail-content"></div></section></div>
   <script src="/app.js"></script>
 </body>
