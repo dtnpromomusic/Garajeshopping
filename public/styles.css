@@ -198,3 +198,36 @@
   .checkout-form input { min-height:37px; }
   .checkout-form textarea { min-height:48px; }
 }
+
+
+/* Carrito con color de acción: visible y claramente activo */
+.cart-button{
+  background:#7157ef !important;
+  color:#ffffff !important;
+  box-shadow:0 5px 14px #7157ef38;
+  transition:background .2s,transform .2s,box-shadow .2s;
+}
+.cart-button:hover{
+  background:#5d43dc !important;
+  transform:translateY(-1px);
+  box-shadow:0 8px 18px #7157ef50;
+}
+.cart-button b{
+  background:#ffffff !important;
+  color:#5d43dc !important;
+}
+.floating-cart{
+  background:#7157ef !important;
+  color:#ffffff !important;
+  box-shadow:0 8px 24px #7157ef55 !important;
+  border:2px solid #ffffff;
+}
+.floating-cart:hover{
+  background:#5d43dc !important;
+  box-shadow:0 11px 28px #7157ef70 !important;
+}
+.floating-cart b{
+  background:#d8f36a !important;
+  color:#24252b !important;
+  border-color:#ffffff !important;
+}
