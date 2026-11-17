@@ -60,8 +60,28 @@
 
     <section class="selection-section section-wrap" id="seleccion">
       <div class="section-heading"><div><span class="eyebrow">EL DESCUBRIMIENTO EMPIEZA AQUÍ</span><h2 id="selection-title">Selección de categoría</h2><p class="section-intro">Explora los artículos disponibles en esta categoría.</p><a class="back-categories" href="#categorias">← Volver a las categorías</a></div><span class="heading-aside">PRIMERA EDICIÓN<br>EN PREPARACIÓN</span></div>
-      <div class="catalog-toolbar"><div class="filter-pills" id="filters"><button class="filter active" data-filter="Todos">Todo</button><button class="filter" data-filter="Muebles">Muebles</button><button class="filter" data-filter="Ropa vintage">Vintage</button><button class="filter" data-filter="Artículos únicos">Únicos</button><button class="filter" data-filter="Coleccionables">Coleccionables</button><button class="filter" data-filter="Decoración e iluminación">Decoración</button><button class="filter" data-filter="Herramientas">Herramientas</button><button class="filter" data-filter="Pieza única">Pieza única</button><button class="filter" data-filter="Juguetes">Juguetes</button><button class="filter" data-filter="Retro">Retro</button></div><span class="catalog-status">CATÁLOGO EN PREPARACIÓN</span></div>
-      <div id="product-grid" class="product-grid" aria-live="polite"></div><div class="empty-catalog" id="empty-catalog"><div class="empty-art">✳</div><div><span class="eyebrow">ESTAMOS PREPARANDO ALGO BUENO</span><h3>El próximo hallazgo puede ser tuyo.</h3><p>Estamos seleccionando artículos para inaugurar GARAJE SHOPPING.</p></div><span class="empty-side-note">COMING<br>SOON ↗</span></div>
+      <div class="category-browser">
+        <aside class="category-sidebar" aria-label="Categorías del catálogo">
+          <span class="sidebar-eyebrow">EXPLORAR</span>
+          <h3>Categorías</h3>
+          <nav class="sidebar-category-list">
+            <button class="sidebar-category active" data-sidebar-category="Todos"><span>✳</span> Todas las categorías</button>
+            <button class="sidebar-category" data-sidebar-category="Muebles"><span>01</span> Muebles</button>
+            <button class="sidebar-category" data-sidebar-category="Ropa vintage"><span>02</span> Ropa vintage</button>
+            <button class="sidebar-category" data-sidebar-category="Artículos únicos"><span>03</span> Artículos únicos</button>
+            <button class="sidebar-category" data-sidebar-category="Coleccionables"><span>04</span> Coleccionables</button>
+            <button class="sidebar-category" data-sidebar-category="Decoración e iluminación"><span>05</span> Decoración e iluminación</button>
+            <button class="sidebar-category" data-sidebar-category="Herramientas"><span>06</span> Herramientas</button>
+            <button class="sidebar-category" data-sidebar-category="Pieza única"><span>07</span> Pieza única</button>
+            <button class="sidebar-category" data-sidebar-category="Juguetes"><span>08</span> Juguetes</button>
+            <button class="sidebar-category" data-sidebar-category="Retro"><span>09</span> Retro</button>
+          </nav>
+        </aside>
+        <div class="category-results">
+          <div class="catalog-toolbar"><div class="filter-pills" id="filters" hidden></div><span class="catalog-status">CATÁLOGO EN PREPARACIÓN</span></div>
+          <div id="product-grid" class="product-grid" aria-live="polite"></div><div class="empty-catalog" id="empty-catalog"><div class="empty-art">✳</div><div><span class="eyebrow">ESTAMOS PREPARANDO ALGO BUENO</span><h3>El próximo hallazgo puede ser tuyo.</h3><p>Estamos seleccionando artículos para inaugurar GARAJE SHOPPING.</p></div><span class="empty-side-note">COMING<br>SOON ↗</span></div>
+        </div>
+      </div>
     </section>
 
     <section class="how-section" id="como-comprar"><div class="section-wrap how-inner"><div><span class="eyebrow">SIN CUENTAS. SIN VUELTAS.</span><h2>Encontrar. Elegir.<br><em>Y listo.</em></h2><p>Queremos que comprar sea tan fácil como descubrir algo que te encanta.</p></div><div class="steps"><div><span>01</span><b>Descubre</b><small>Explora artículos y encuentra tu favorito.</small></div><div><span>02</span><b>Arma tu bolsa</b><small>Añade lo que quieras y revisa tu selección.</small></div><div><span>03</span><b>Confirma tu pedido</b><small>Completa tus datos y dirección, sin crear una cuenta.</small></div></div></div></section>
