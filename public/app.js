@@ -54,7 +54,7 @@ function selectCategory(category, scroll = false) {
   categoryResults.hidden = category === "Todos";
   filters.forEach(button => button.classList.toggle("active", button.dataset.filter === category));
   sidebarCategories.forEach(button => button.classList.toggle("active", button.dataset.sidebarCategory === category));
-  if (category !== "Todos") selectionTitle.textContent = category;
+  selectionTitle.textContent = category === "Todos" ? "Todas las categorías" : category;
   renderProducts();
   if (scroll && category !== "Todos") selectionSection.scrollIntoView({behavior:"smooth",block:"start"});
 }
@@ -89,9 +89,7 @@ search.addEventListener("input", () => {
   const match = tiles.find(tile => tile.dataset.category.toLocaleLowerCase("es").includes(term));
   if (match) selectCategory(match.dataset.category, true);
   else {
-    activeCategory = "Todos";
-    selectionSection.hidden = false;
-categoryResults.hidden = true;
+    selectCategory("Todos");
     filters.forEach(button => button.classList.toggle("active", button.dataset.filter === "Todos"));
     sidebarCategories.forEach(button => button.classList.toggle("active", button.dataset.sidebarCategory === "Todos"));
     renderProducts();
