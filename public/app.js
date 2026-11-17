@@ -17,8 +17,8 @@ const products = [{
   size: "41",
   stock: 1,
   unique: true,
-  image: "",
-  description: "Artículo de pieza única. Talla 41, estado como nuevo. La fotografía original del artículo está pendiente de volver a adjuntarse; no se sustituye por una imagen genérica."
+  image: "/images/calzado-pieza-unica.jpg",
+  description: "Calzado deportivo en tonos negro, blanco, turquesa y rosado. Pieza única, talla 41, estado como nuevo."
 }];
 
 let activeCategory = "Todos";
@@ -56,7 +56,7 @@ function renderProducts() {
   productGrid.innerHTML = visible.map(product => `
     <article class="product-card" data-product="${product.id}">
       <button class="product-visual" type="button" data-view="${product.id}" aria-label="Ver ${product.name}">
-        ✳<small>FOTOGRAFÍA ORIGINAL PENDIENTE</small>
+        <img src="${product.image}" alt="Fotografía real del calzado deportivo en tonos negro, blanco, turquesa y rosado">
       </button>
       <div class="product-info">
         <span class="stock-tag">PIEZA ÚNICA · ${product.stock} DISPONIBLE</span>
@@ -144,6 +144,7 @@ function showProduct(id) {
   $("#product-detail-content").innerHTML = `
     <span class="eyebrow">${product.category.toUpperCase()}</span>
     <h3>${product.name}</h3>
+    <img class="detail-product-image" src="${product.image}" alt="Fotografía real del calzado deportivo">
     <span class="stock-tag">PIEZA ÚNICA · ${product.stock} DISPONIBLE</span>
     <p>Estado: <b>${product.condition}</b><br>Talla: <b>${product.size}</b><br>Disponibilidad: <b>1 unidad</b></p>
     <p>${product.description}</p>
