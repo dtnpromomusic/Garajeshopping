@@ -117,3 +117,14 @@
 .cart-product-copy .line-price{margin-top:2px}
 .cart-row .qty-controls{grid-column:2;flex-wrap:wrap;gap:7px}
 @media(max-width:380px){.cart-product-image{width:64px;height:72px}.cart-row{grid-template-columns:64px minmax(0,1fr)}}
+
+/* Miniaturas compactas para la bolsa de shopping */
+.cart-row{grid-template-columns:54px minmax(0,1fr);gap:8px 10px}
+.cart-product-image{width:54px;height:58px;object-fit:cover;border-radius:6px;grid-row:1 / span 2}
+.cart-product-copy{gap:3px}
+.cart-product-copy strong{font-size:11px}
+.cart-product-copy small{font-size:9px}
+.cart-product-copy .line-price{font-size:11px}
+.cart-row .qty-controls{gap:6px}
+.cart-row .qty-controls button{width:23px;height:23px}
+@media(max-width:380px){.cart-row{grid-template-columns:48px minmax(0,1fr)}.cart-product-image{width:48px;height:52px}}
