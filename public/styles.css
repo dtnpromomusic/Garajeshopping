@@ -298,3 +298,8 @@
 .cart-icon{display:inline-flex;align-items:center;justify-content:center}
 .floating-cart-icon{display:flex;align-items:center;justify-content:center}
 .floating-cart-icon .bag-g-icon{width:30px;height:30px}
+
+/* SVG bag icon: explicit visible G monogram */
+.bag-g-icon{overflow:visible;min-width:25px;min-height:25px}
+.cart-icon .bag-g-icon{width:27px;height:27px}
+.floating-cart-icon .bag-g-icon{width:34px;height:34px}
