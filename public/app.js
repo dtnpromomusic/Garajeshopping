@@ -177,11 +177,20 @@ $("#product-detail-content").addEventListener("click", event => {
 document.addEventListener("keydown", event => {
   if (event.key === "Escape") {
     setCartOpen(false);
+    if (selectionSection.classList.contains("is-open")) closeCategoryPanel();
     $("#product-detail-backdrop").classList.remove("open");
     $("#product-detail-backdrop").setAttribute("aria-hidden","true");
   }
 });
 selectionSection.hidden = true;
 categoryResults.hidden = false;
+function closeCategoryPanel() {
+  selectionSection.classList.remove("is-open");
+  selectionSection.setAttribute("aria-hidden", "true");
+  document.body.classList.remove("category-panel-open");
+  selectionSection.hidden = true;
+}
+$("#close-category-panel").addEventListener("click", closeCategoryPanel);
+$("#category-panel-backdrop").addEventListener("click", closeCategoryPanel);
 renderProducts();
 renderCart();
