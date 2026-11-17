@@ -281,7 +281,8 @@ checkoutForm.addEventListener("submit", async event => {
     renderCart();
   }
 });
-\nfunction showProduct(id) {
+
+function showProduct(id) {
   const product = products.find(item => item.id === id);
   if (!product) return;
   const detail = $("#product-detail-backdrop");
