@@ -136,3 +136,21 @@
 .floating-cart-icon{font-size:27px;line-height:1}
 .floating-cart b{position:absolute;top:-4px;right:-3px;min-width:23px;height:23px;padding:0 5px;border-radius:20px;display:grid;place-items:center;background:var(--purple);color:#fff;border:2px solid var(--paper);font-size:10px;font-weight:800}
 @media(max-width:680px){.floating-cart{right:15px;bottom:17px;width:56px;height:56px}.floating-cart-icon{font-size:25px}}
+
+
+/* Formulario seguro de confirmación de pedidos */
+.checkout-form{display:grid;gap:12px;margin-top:14px}
+.checkout-form[hidden],.checkout-success[hidden]{display:none!important}
+.checkout-form label{display:grid;gap:6px;color:var(--ink);font-size:11px;font-weight:800}
+.checkout-form label small{display:inline;color:var(--muted);font-weight:500}
+.checkout-form input,.checkout-form textarea{width:100%;box-sizing:border-box;border:1px solid var(--line);border-radius:7px;background:#fffefa;color:var(--ink);padding:11px 12px;font:500 12px var(--body);outline:none}
+.checkout-form input:focus,.checkout-form textarea:focus{border-color:var(--purple);box-shadow:0 0 0 3px #6750a41a}
+.checkout-form textarea{resize:vertical}
+.checkout-shipping-note{padding:11px;border-radius:7px;background:#f1efe9;color:#66616b;font-size:10px;line-height:1.55}
+.checkout-cancel{border:0;background:transparent;color:var(--muted);padding:9px;cursor:pointer;font:700 11px var(--body)}
+.checkout-error{padding:10px;border-radius:7px;background:#fff0ee;color:#a52b1c;font-size:11px;line-height:1.5}
+.checkout-success{text-align:center;padding:18px 8px}
+.checkout-success .success-mark{display:grid;place-items:center;width:48px;height:48px;margin:0 auto 12px;border-radius:50%;background:var(--lime);font-size:25px;font-weight:900}
+.checkout-success h3{font:700 22px var(--display);margin:8px 0}
+.checkout-success p{font-size:11px;line-height:1.6;color:var(--muted)}
+.checkout-success>strong{display:block;margin:10px 0;padding:12px;background:#f1efe9;border-radius:7px;font:700 20px var(--display);letter-spacing:.08em}
