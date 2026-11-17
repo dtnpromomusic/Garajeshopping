@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#111111">
+  <meta name="description" content="GARAJE SHOPPING: muebles, vintage, coleccionables, decoración, iluminación y herramientas.">
+  <title>GARAJE SHOPPING | Encuentra algo diferente</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="/" aria-label="Garaje Shopping inicio"><span class="brand-mark">G</span><span>GARAJE<span class="brand-accent"> SHOPPING</span></span></a>
+    <nav class="desktop-nav" aria-label="Navegación principal">
+      <a href="#categorias">Categorías</a><a href="#seleccion">Descubre</a><a href="#como-comprar">Cómo comprar</a>
+    </nav>
+    <button class="cart-button" id="open-cart" aria-label="Abrir carrito">Carrito <span id="cart-count">0</span></button>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-copy">
+        <span class="eyebrow"><i></i> OBJETOS CON PERSONALIDAD</span>
+        <h1>Encuentra eso<br>que no se encuentra <em>en cualquier lugar.</em></h1>
+        <p>Muebles, piezas vintage, decoración y hallazgos únicos. Dale una segunda mirada a lo extraordinario.</p>
+        <a class="primary-button" href="#seleccion">Explorar colección <span>↗</span></a>
+      </div>
+      <div class="hero-art" aria-label="Composición editorial de objetos y decoración">
+        <div class="art-orbit"></div><div class="art-label">LO ÚNICO<br>TE ENCUENTRA</div>
+        <div class="art-card art-card-one"><span>01 / OBJETOS</span><b>Una historia<br>en cada pieza.</b></div>
+        <div class="art-card art-card-two"><span>02 / ESTILO</span><b>Tu espacio.<br>Tu manera.</b></div>
+        <div class="art-spark">✳</div>
+      </div>
+    </section>
+
+    <section class="category-section section-wrap" id="categorias">
+      <div class="section-heading"><div><span class="eyebrow">EXPLORA A TU MANERA</span><h2>Un garaje lleno de posibilidades.</h2></div><span class="section-note">SEIS MUNDOS · INFINITOS HALLAZGOS</span></div>
+      <div class="category-grid">
+        <a class="category-tile cat-furniture" href="#seleccion" data-category="Muebles"><span>01</span><b>Muebles</b><small>Piezas para vivirlas</small><i>↗</i></a>
+        <a class="category-tile cat-vintage" href="#seleccion" data-category="Ropa vintage"><span>02</span><b>Ropa vintage</b><small>Estilo con historia</small><i>↗</i></a>
+        <a class="category-tile cat-unique" href="#seleccion" data-category="Artículos únicos"><span>03</span><b>Artículos únicos</b><small>Difíciles de repetir</small><i>↗</i></a>
+        <a class="category-tile cat-collect" href="#seleccion" data-category="Coleccionables"><span>04</span><b>Coleccionables</b><small>Para quienes saben</small><i>↗</i></a>
+        <a class="category-tile cat-decor" href="#seleccion" data-category="Decoración e iluminación"><span>05</span><b>Decoración e iluminación</b><small>Detalles que transforman</small><i>↗</i></a>
+        <a class="category-tile cat-tools" href="#seleccion" data-category="Herramientas"><span>06</span><b>Herramientas</b><small>Listas para crear</small><i>↗</i></a>
+      </div>
+    </section>
+
+    <section class="selection-section section-wrap" id="seleccion">
+      <div class="section-heading"><div><span class="eyebrow">EL DESCUBRIMIENTO EMPIEZA AQUÍ</span><h2>Hallazgos seleccionados.</h2><p class="muted">Estamos preparando el catálogo. Muy pronto encontrarás piezas disponibles para comprar.</p></div></div>
+      <div class="catalog-toolbar"><div class="filter-pills" id="filters"><button class="filter active" data-filter="Todos">Todo</button><button class="filter" data-filter="Muebles">Muebles</button><button class="filter" data-filter="Ropa vintage">Vintage</button><button class="filter" data-filter="Decoración e iluminación">Decoración</button><button class="filter" data-filter="Herramientas">Herramientas</button></div><span class="catalog-status">CATÁLOGO EN PREPARACIÓN</span></div>
+      <div class="empty-catalog"><div class="empty-icon">✳</div><h3>Lo bueno merece una buena selección.</h3><p>Estamos organizando los primeros artículos de GARAJE SHOPPING.</p></div>
+    </section>
+
+    <section class="how-section" id="como-comprar"><div class="section-wrap how-inner"><div><span class="eyebrow">FÁCIL Y DIRECTO</span><h2>Comprar sin complicaciones.</h2><p>Sin crear una cuenta. Elige tus artículos, completa tus datos y confirma tu pedido.</p></div><div class="steps"><div><span>01</span><b>Descubre</b><small>Explora los artículos disponibles.</small></div><div><span>02</span><b>Añade al carrito</b><small>Revisa tus productos y cantidades.</small></div><div><span>03</span><b>Confirma</b><small>Déjanos tus datos y dirección.</small></div></div></div></section>
+  </main>
+  <footer><a class="brand" href="/"><span class="brand-mark">G</span><span>GARAJE<span class="brand-accent"> SHOPPING</span></span></a><span>Descubre. Encuentra. Hazlo tuyo.</span><small>© <span id="year"></span> GARAJE SHOPPING</small></footer>
+
+  <div class="drawer-backdrop" id="drawer-backdrop"></div>
+  <aside class="cart-drawer" id="cart-drawer" aria-label="Carrito de compra" aria-hidden="true"><div class="drawer-head"><div><span class="eyebrow">TU SELECCIÓN</span><h2>Carrito</h2></div><button id="close-cart" class="icon-button" aria-label="Cerrar carrito">×</button></div><div id="cart-items" class="cart-items"><p class="cart-empty">Tu carrito está esperando un hallazgo.</p></div><div class="drawer-foot"><div class="total-line"><span>Subtotal</span><b id="cart-total">RD$ 0.00</b></div><p>El envío y las opciones de pago se mostrarán al confirmar.</p><button class="primary-button checkout-button" disabled>Continuar compra</button></div></aside>
+  <script src="/app.js"></script>
+</body>
+</html>
