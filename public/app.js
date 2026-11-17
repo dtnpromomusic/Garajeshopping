@@ -1,6 +1,7 @@
 const $ = (selector) => document.querySelector(selector);
 const drawer = $("#cart-drawer");
 const filters = [...document.querySelectorAll(".filter")];
+const sidebarCategories = [...document.querySelectorAll(".sidebar-category")];
 const tiles = [...document.querySelectorAll(".category-tile")];
 const productGrid = $("#product-grid");
 const selectionSection = $("#seleccion");
@@ -50,6 +51,7 @@ function selectCategory(category, scroll = false) {
   activeCategory = category;
   selectionSection.hidden = category === "Todos";
   filters.forEach(button => button.classList.toggle("active", button.dataset.filter === category));
+  sidebarCategories.forEach(button => button.classList.toggle("active", button.dataset.sidebarCategory === category));
   if (category !== "Todos") selectionTitle.textContent = category;
   renderProducts();
   if (scroll && category !== "Todos") selectionSection.scrollIntoView({behavior:"smooth",block:"start"});
@@ -74,6 +76,7 @@ function renderProducts() {
   else $(".section-intro").textContent = "Estamos preparando artículos para esta categoría. Próximamente encontrarás aquí nuevas piezas.";
 }
 filters.forEach(button => button.addEventListener("click", () => selectCategory(button.dataset.filter)));
+sidebarCategories.forEach(button => button.addEventListener("click", () => selectCategory(button.dataset.sidebarCategory)));
 tiles.forEach(tile => tile.addEventListener("click", () => {
   // La portada permanece intacta; al pulsarla se abre el renglón de artículos correspondiente.
   selectCategory(tile.dataset.category, true);
@@ -87,6 +90,7 @@ search.addEventListener("input", () => {
     activeCategory = "Todos";
     selectionSection.hidden = true;
     filters.forEach(button => button.classList.toggle("active", button.dataset.filter === "Todos"));
+    sidebarCategories.forEach(button => button.classList.toggle("active", button.dataset.sidebarCategory === "Todos"));
     renderProducts();
   }
 });
