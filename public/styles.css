@@ -55,3 +55,10 @@
  .sidebar-category{width:auto;white-space:nowrap;padding:9px 11px;background:#f1efe9}
  .sidebar-category span{width:auto;flex-basis:auto}
 }
+
+/* Navegación de categorías visible directamente en la página de inicio */
+.category-home-layout{display:grid;grid-template-columns:235px minmax(0,1fr);gap:30px;align-items:start}
+.category-home-layout .category-sidebar{position:sticky;top:104px;align-self:start}
+.category-home-layout .category-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:13px}
+@media(max-width:900px){.category-home-layout{grid-template-columns:210px minmax(0,1fr);gap:18px}.category-home-layout .category-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:680px){.category-home-layout{grid-template-columns:1fr;gap:16px}.category-home-layout .category-sidebar{position:static}.category-home-layout .category-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
