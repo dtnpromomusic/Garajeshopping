@@ -180,6 +180,7 @@ document.addEventListener("keydown", event => {
     $("#product-detail-backdrop").setAttribute("aria-hidden","true");
   }
 });
-selectionSection.hidden = true;
+selectionSection.hidden = false;
+categoryResults.hidden = true;
 renderProducts();
 renderCart();
