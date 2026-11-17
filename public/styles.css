@@ -154,3 +154,47 @@
 .checkout-success h3{font:700 22px var(--display);margin:8px 0}
 .checkout-success p{font-size:11px;line-height:1.6;color:var(--muted)}
 .checkout-success>strong{display:block;margin:10px 0;padding:12px;background:#f1efe9;border-radius:7px;font:700 20px var(--display);letter-spacing:.08em}
+
+
+/* Corrección: los estados vacíos no deben tapar el catálogo */
+.empty-catalog[hidden],
+#product-grid[hidden],
+.checkout-form[hidden],
+.checkout-success[hidden] { display:none !important; }
+
+/* Compra breve y clara: formulario compacto en dos columnas */
+.cart-drawer { padding:22px; }
+.drawer-head { padding-bottom:13px; }
+.drawer-head h2 { font-size:24px; }
+.cart-items { padding:12px 0; }
+.cart-row { padding:9px 0; }
+.drawer-foot { padding-top:12px; }
+.drawer-foot > p { margin:7px 0 10px; font-size:10px; line-height:1.4; }
+.checkout-button { padding:13px; margin-top:7px; }
+.checkout-form { grid-template-columns:1fr 1fr; gap:9px 10px; margin-top:10px; }
+.checkout-form label { gap:4px; font-size:10px; }
+.checkout-form label:nth-child(4),
+.checkout-form label:nth-child(5),
+.checkout-shipping-note,
+.checkout-form .checkout-button,
+.checkout-form .checkout-cancel,
+.checkout-form .checkout-error { grid-column:1 / -1; }
+.checkout-form input { min-height:39px; padding:9px 10px; font-size:11px; }
+.checkout-form textarea { min-height:54px; padding:9px 10px; font-size:11px; }
+.checkout-form label:nth-child(5) textarea { min-height:42px; }
+.checkout-shipping-note { padding:8px 10px; font-size:9px; }
+.checkout-form .checkout-button { margin-top:0; }
+.checkout-cancel { padding:5px; }
+@media(max-width:520px) {
+  .cart-drawer { padding:17px 16px; }
+  .drawer-head h2 { font-size:22px; }
+  .cart-items { min-height:90px; }
+  .checkout-form { grid-template-columns:1fr; gap:8px; }
+  .checkout-form label,
+  .checkout-shipping-note,
+  .checkout-form .checkout-button,
+  .checkout-form .checkout-cancel,
+  .checkout-form .checkout-error { grid-column:1; }
+  .checkout-form input { min-height:37px; }
+  .checkout-form textarea { min-height:48px; }
+}
