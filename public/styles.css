@@ -311,3 +311,43 @@ svg.bag-g-icon{display:block!important;visibility:visible!important;opacity:1!im
 .cart-icon svg.bag-g-icon{width:30px!important;height:30px!important}
 .floating-cart-icon svg.bag-g-icon{width:36px!important;height:36px!important}
 .bag-g-icon path{vector-effect:non-scaling-stroke}
+
+
+/* Móvil: categorías de Explorar en carrusel horizontal deslizable */
+@media(max-width:680px){
+  .hero-catalog .category-sidebar{padding:16px 14px;overflow:hidden}
+  .hero-catalog .category-sidebar h3{margin:5px 0 11px}
+  .hero-catalog .sidebar-category-list{
+    display:flex!important;
+    flex-direction:row!important;
+    flex-wrap:nowrap!important;
+    gap:8px!important;
+    width:100%;
+    overflow-x:auto!important;
+    overflow-y:hidden!important;
+    padding:2px 2px 10px!important;
+    scroll-snap-type:x proximity;
+    -webkit-overflow-scrolling:touch;
+    overscroll-behavior-x:contain;
+    scrollbar-width:thin;
+    scrollbar-color:var(--purple) #eeece5;
+  }
+  .hero-catalog .sidebar-category{
+    display:inline-flex!important;
+    flex:0 0 auto!important;
+    width:auto!important;
+    min-height:38px;
+    white-space:nowrap!important;
+    scroll-snap-align:start;
+    padding:10px 13px!important;
+    border:1px solid var(--line)!important;
+    border-radius:24px!important;
+    background:#f1efe9!important;
+  }
+  .hero-catalog .sidebar-category.active{
+    background:var(--ink)!important;
+    color:#fff!important;
+    border-color:var(--ink)!important;
+  }
+  .hero-catalog .sidebar-category.active span{color:var(--lime)!important}
+}
