@@ -10,6 +10,9 @@ const selectionTitle = $("#selection-title");
 const emptyCatalog = $("#empty-catalog");
 const search = $("#site-search");
 const CART_KEY = "garaje-shopping-cart-v1";
+const SUPABASE_URL = "https://ffakywocjcywmvvdhpza.supabase.co";
+const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZmYWt5d29jamN5d212dmRocHphIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTQ1MDg5MTMsImV4cCI6MjExMDA4NDkxM30.IF_BJ3POt662z2hTbaNx1qL8DujZz3-_uN--WUsvf3A";
+let orderSubmitting = false;
 
 // Solo se muestran artículos cuyos datos han sido confirmados.
 const products = [
@@ -202,7 +205,7 @@ function renderCart() {
       <div class="qty-controls"><button data-qty="-1" data-id="${product.id}" aria-label="Quitar uno">−</button><b>${quantity}</b><button data-qty="1" data-id="${product.id}" aria-label="Añadir uno" ${product.stock !== null && quantity >= product.stock ? "disabled" : ""}>+</button><button class="remove-item" data-remove="${product.id}">Eliminar</button></div>
     </div>`).join("") : '<p class="cart-empty">Tu bolsa está esperando un buen hallazgo.</p>';
   $("#cart-total").textContent = money(lines.reduce((sum,line) => sum + line.product.price * line.quantity, 0));
-  $("#checkout-button").disabled = lines.length === 0;
+  $("#checkout-button").disabled = lines.length === 0 || orderSubmitting;
 }
 $("#cart-items").addEventListener("click", event => {
   const qty = event.target.closest("[data-qty]");
@@ -210,7 +213,75 @@ $("#cart-items").addEventListener("click", event => {
   if (qty) changeQuantity(qty.dataset.id, Number(qty.dataset.qty));
   if (remove) { cart = cart.filter(item => item.id !== remove.dataset.remove); saveCart(); }
 });
-function showProduct(id) {
+
+const checkoutForm = $("#checkout-form");
+$("#checkout-button").addEventListener("click", () => {
+  if (!cart.length) return;
+  checkoutForm.hidden = false;
+  $("#checkout-button").hidden = true;
+  $("#checkout-success").hidden = true;
+  $("#checkout-error").hidden = true;
+  checkoutForm.querySelector('input[name="name"]').focus();
+});
+$("#cancel-checkout").addEventListener("click", () => {
+  checkoutForm.hidden = true;
+  $("#checkout-button").hidden = false;
+  $("#checkout-error").hidden = true;
+});
+$("#finish-order").addEventListener("click", () => {
+  $("#checkout-success").hidden = true;
+  setCartOpen(false);
+});
+checkoutForm.addEventListener("submit", async event => {
+  event.preventDefault();
+  if (orderSubmitting || !cart.length) return;
+  const submitButton = $("#submit-order");
+  const errorBox = $("#checkout-error");
+  const formData = new FormData(checkoutForm);
+  const customer = {
+    name: String(formData.get("name") || "").trim(),
+    phone: String(formData.get("phone") || "").trim(),
+    email: String(formData.get("email") || "").trim(),
+    address: String(formData.get("address") || "").trim(),
+    notes: String(formData.get("notes") || "").trim()
+  };
+  const items = cart.map(row => ({id:row.id,quantity:row.quantity}));
+  orderSubmitting = true;
+  submitButton.disabled = true;
+  submitButton.textContent = "Registrando pedido…";
+  errorBox.hidden = true;
+  try {
+    const result = await fetch(SUPABASE_URL + "/functions/v1/create-order", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "apikey": SUPABASE_ANON_KEY,
+        "Authorization": "Bearer " + SUPABASE_ANON_KEY
+      },
+      body: JSON.stringify({customer,items})
+    });
+    const payload = await result.json().catch(() => ({}));
+    if (!result.ok || !payload.ok || !payload.order?.order_code) {
+      throw new Error(payload.error || "No pudimos registrar tu pedido. Inténtalo nuevamente.");
+    }
+    const code = payload.order.order_code;
+    cart = [];
+    saveCart();
+    checkoutForm.hidden = true;
+    $("#checkout-button").hidden = true;
+    $("#order-code").textContent = code;
+    $("#checkout-success").hidden = false;
+  } catch (error) {
+    errorBox.textContent = error.message || "Ocurrió un error al registrar tu pedido.";
+    errorBox.hidden = false;
+  } finally {
+    orderSubmitting = false;
+    submitButton.disabled = false;
+    submitButton.textContent = "Confirmar pedido";
+    renderCart();
+  }
+});
+\nfunction showProduct(id) {
   const product = products.find(item => item.id === id);
   if (!product) return;
   const detail = $("#product-detail-backdrop");
