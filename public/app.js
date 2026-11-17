@@ -1,5 +1,40 @@
 const $ = (selector) => document.querySelector(selector);
 const drawer = $("#cart-drawer");
+const filters = [...document.querySelectorAll(".filter")];
+const tiles = [...document.querySelectorAll(".category-tile")];
+const productGrid = $("#product-grid");
+const emptyCatalog = $("#empty-catalog");
+const search = $("#site-search");
+const CART_KEY = "garaje-shopping-cart-v1";
+
+// Solo se muestran artículos cuyos datos han sido confirmados.
+const products = [{
+  id: "pieza-unica-calzado-41",
+  name: "Calzado deportivo",
+  category: "Pieza única",
+  price: 4500,
+  condition: "Como nuevo",
+  size: "41",
+  stock: 1,
+  unique: true,
+  image: "",
+  description: "Artículo de pieza única. Talla 41, estado como nuevo. La fotografía original del artículo está pendiente de volver a adjuntarse; no se sustituye por una imagen genérica."
+}];
+
+let activeCategory = "Todos";
+let cart = loadCart();
+
+function loadCart() {
+  try { return JSON.parse(localStorage.getItem(CART_KEY) || "[]"); }
+  catch { return []; }
+}
+function saveCart() {
+  localStorage.setItem(CART_KEY, JSON.stringify(cart));
+  renderCart();
+}
+function money(value) {
+  return new Intl.NumberFormat("es-DO", {style:"currency",currency:"DOP",maximumFractionDigits:2}).format(value);
+}
 function setCartOpen(open) {
   document.body.classList.toggle("cart-open", open);
   drawer.setAttribute("aria-hidden", String(!open));
@@ -9,35 +44,130 @@ $("#close-cart").addEventListener("click", () => setCartOpen(false));
 $("#drawer-backdrop").addEventListener("click", () => setCartOpen(false));
 $("#year").textContent = new Date().getFullYear();
 
-const filters = [...document.querySelectorAll(".filter")];
-const tiles = [...document.querySelectorAll(".category-tile")];
-function selectCategory(category) {
-  filters.forEach((button) => button.classList.toggle("active", button.dataset.filter === category));
-  tiles.forEach((tile) => {
-    tile.hidden = category !== "Todos" && tile.dataset.category !== category;
-  });
+function selectCategory(category, scroll = false) {
+  activeCategory = category;
+  filters.forEach(button => button.classList.toggle("active", button.dataset.filter === category));
+  tiles.forEach(tile => { tile.hidden = category !== "Todos" && tile.dataset.category !== category; });
+  renderProducts();
+  if (scroll) $("#seleccion").scrollIntoView({behavior:"smooth",block:"start"});
 }
-filters.forEach((button) => button.addEventListener("click", () => selectCategory(button.dataset.filter)));
-tiles.forEach((tile) => tile.addEventListener("click", () => {
-  filters.forEach((button) => button.classList.toggle("active", button.dataset.filter === tile.dataset.category));
+function renderProducts() {
+  const visible = products.filter(product => activeCategory === "Todos" || product.category === activeCategory);
+  productGrid.innerHTML = visible.map(product => `
+    <article class="product-card" data-product="${product.id}">
+      <button class="product-visual" type="button" data-view="${product.id}" aria-label="Ver ${product.name}">
+        ✳<small>FOTOGRAFÍA ORIGINAL PENDIENTE</small>
+      </button>
+      <div class="product-info">
+        <span class="stock-tag">PIEZA ÚNICA · ${product.stock} DISPONIBLE</span>
+        <h3>${product.name}</h3>
+        <div class="product-meta">Estado: ${product.condition}<br>Talla: ${product.size}</div>
+        <div class="product-price">${money(product.price)}</div>
+        <div class="product-actions"><button class="view-product" data-view="${product.id}">Ver artículo</button><button class="add-product" data-add="${product.id}">Añadir a bolsa</button></div>
+      </div>
+    </article>`).join("");
+  emptyCatalog.hidden = visible.length > 0;
+  if (visible.length) $(".section-intro").textContent = "Artículos disponibles en esta selección. Pulsa una ficha para ver sus detalles.";
+  else $(".section-intro").textContent = "Estamos preparando la primera selección de artículos. Vuelve pronto para descubrir las piezas disponibles.";
+}
+filters.forEach(button => button.addEventListener("click", () => selectCategory(button.dataset.filter)));
+tiles.forEach(tile => tile.addEventListener("click", () => {
+  // La portada permanece intacta; al pulsarla se abre el renglón de artículos correspondiente.
+  selectCategory(tile.dataset.category, true);
 }));
-
-const search = $("#site-search");
 search.addEventListener("input", () => {
   const term = search.value.trim().toLocaleLowerCase("es");
-  const matching = tiles.filter((tile) => tile.dataset.category.toLocaleLowerCase("es").includes(term));
-  tiles.forEach((tile) => { tile.hidden = Boolean(term) && !matching.includes(tile); });
-  filters.forEach((button) => button.classList.toggle("active", !term && button.dataset.filter === "Todos"));
-  if (term) $("#categorias").scrollIntoView({ behavior: "smooth", block: "start" });
-});
-search.addEventListener("keydown", (event) => {
-  if (event.key === "Escape") { search.value = ""; selectCategory("Todos"); }
-  if (event.key === "Enter") $("#categorias").scrollIntoView({ behavior: "smooth", block: "start" });
-});
-document.addEventListener("keydown", (event) => {
-  if (event.key === "Escape") setCartOpen(false);
-  if (event.key === "/" && !["INPUT", "TEXTAREA"].includes(document.activeElement.tagName)) {
-    event.preventDefault();
-    search.focus();
+  if (!term) { selectCategory("Todos"); return; }
+  const match = tiles.find(tile => tile.dataset.category.toLocaleLowerCase("es").includes(term));
+  if (match) selectCategory(match.dataset.category, true);
+  else {
+    activeCategory = "Todos";
+    filters.forEach(button => button.classList.toggle("active", button.dataset.filter === "Todos"));
+    tiles.forEach(tile => { tile.hidden = true; });
+    renderProducts();
   }
 });
+search.addEventListener("keydown", event => {
+  if (event.key === "Escape") { search.value = ""; selectCategory("Todos"); }
+});
+productGrid.addEventListener("click", event => {
+  const add = event.target.closest("[data-add]");
+  const view = event.target.closest("[data-view]");
+  if (add) addToCart(add.dataset.add);
+  if (view) showProduct(view.dataset.view);
+});
+function addToCart(id) {
+  const product = products.find(item => item.id === id);
+  if (!product) return;
+  const current = cart.find(item => item.id === id);
+  const quantity = current ? current.quantity : 0;
+  if (quantity >= product.stock) { alert("Esta pieza única ya está en tu bolsa. Solo hay 1 disponible."); return; }
+  if (current) current.quantity += 1;
+  else cart.push({id,quantity:1});
+  saveCart();
+  setCartOpen(true);
+}
+function changeQuantity(id, delta) {
+  const product = products.find(item => item.id === id);
+  const item = cart.find(row => row.id === id);
+  if (!item || !product) return;
+  item.quantity = Math.max(0, Math.min(product.stock, item.quantity + delta));
+  cart = cart.filter(row => row.quantity > 0);
+  saveCart();
+}
+function renderCart() {
+  const count = cart.reduce((sum,row) => sum + row.quantity, 0);
+  $("#cart-count").textContent = count;
+  const lines = cart.map(row => {
+    const product = products.find(item => item.id === row.id);
+    return product ? {product,quantity:row.quantity} : null;
+  }).filter(Boolean);
+  $("#cart-items").innerHTML = lines.length ? lines.map(({product,quantity}) => `
+    <div class="cart-row">
+      <div><strong>${product.name}</strong><small>${product.category} · Talla ${product.size} · ${product.condition}</small></div>
+      <span class="line-price">${money(product.price * quantity)}</span>
+      <div class="qty-controls"><button data-qty="-1" data-id="${product.id}" aria-label="Quitar uno">−</button><b>${quantity}</b><button data-qty="1" data-id="${product.id}" aria-label="Añadir uno" ${quantity >= product.stock ? "disabled" : ""}>+</button><button class="remove-item" data-remove="${product.id}">Eliminar</button></div>
+    </div>`).join("") : '<p class="cart-empty">Tu bolsa está esperando un buen hallazgo.</p>';
+  $("#cart-total").textContent = money(lines.reduce((sum,line) => sum + line.product.price * line.quantity, 0));
+  $("#checkout-button").disabled = lines.length === 0;
+}
+$("#cart-items").addEventListener("click", event => {
+  const qty = event.target.closest("[data-qty]");
+  const remove = event.target.closest("[data-remove]");
+  if (qty) changeQuantity(qty.dataset.id, Number(qty.dataset.qty));
+  if (remove) { cart = cart.filter(item => item.id !== remove.dataset.remove); saveCart(); }
+});
+function showProduct(id) {
+  const product = products.find(item => item.id === id);
+  if (!product) return;
+  const detail = $("#product-detail-backdrop");
+  $("#product-detail-content").innerHTML = `
+    <span class="eyebrow">${product.category.toUpperCase()}</span>
+    <h3>${product.name}</h3>
+    <span class="stock-tag">PIEZA ÚNICA · ${product.stock} DISPONIBLE</span>
+    <p>Estado: <b>${product.condition}</b><br>Talla: <b>${product.size}</b><br>Disponibilidad: <b>1 unidad</b></p>
+    <p>${product.description}</p>
+    <strong class="product-price">${money(product.price)}</strong>
+    <button class="add-product" data-add-detail="${product.id}">Añadir a mi bolsa</button>`;
+  detail.classList.add("open");
+  detail.setAttribute("aria-hidden","false");
+}
+$("#product-detail-backdrop").addEventListener("click", event => {
+  if (event.target.id === "product-detail-backdrop" || event.target.closest(".product-detail-close")) {
+    $("#product-detail-backdrop").classList.remove("open");
+    $("#product-detail-backdrop").setAttribute("aria-hidden","true");
+  }
+});
+$("#product-detail-content").addEventListener("click", event => {
+  const button = event.target.closest("[data-add-detail]");
+  if (button) { $("#product-detail-backdrop").classList.remove("open"); addToCart(button.dataset.addDetail); }
+});
+document.addEventListener("keydown", event => {
+  if (event.key === "Escape") {
+    setCartOpen(false);
+    $("#product-detail-backdrop").classList.remove("open");
+    $("#product-detail-backdrop").setAttribute("aria-hidden","true");
+  }
+});
+renderProducts();
+renderCart();
