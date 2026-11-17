@@ -5,6 +5,7 @@ const sidebarCategories = [...document.querySelectorAll(".sidebar-category")];
 const tiles = [...document.querySelectorAll(".category-tile")];
 const productGrid = $("#product-grid");
 const selectionSection = $("#seleccion");
+const categoryResults = $(".category-results");
 const selectionTitle = $("#selection-title");
 const emptyCatalog = $("#empty-catalog");
 const search = $("#site-search");
@@ -49,7 +50,8 @@ $("#year").textContent = new Date().getFullYear();
 
 function selectCategory(category, scroll = false) {
   activeCategory = category;
-  selectionSection.hidden = category === "Todos";
+  selectionSection.hidden = false;
+  categoryResults.hidden = category === "Todos";
   filters.forEach(button => button.classList.toggle("active", button.dataset.filter === category));
   sidebarCategories.forEach(button => button.classList.toggle("active", button.dataset.sidebarCategory === category));
   if (category !== "Todos") selectionTitle.textContent = category;
@@ -88,7 +90,8 @@ search.addEventListener("input", () => {
   if (match) selectCategory(match.dataset.category, true);
   else {
     activeCategory = "Todos";
-    selectionSection.hidden = true;
+    selectionSection.hidden = false;
+categoryResults.hidden = true;
     filters.forEach(button => button.classList.toggle("active", button.dataset.filter === "Todos"));
     sidebarCategories.forEach(button => button.classList.toggle("active", button.dataset.sidebarCategory === "Todos"));
     renderProducts();
