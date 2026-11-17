@@ -138,8 +138,8 @@ function renderCart() {
   }).filter(Boolean);
   $("#cart-items").innerHTML = lines.length ? lines.map(({product,quantity}) => `
     <div class="cart-row">
-      <div><strong>${product.name}</strong><small>${product.categoryLabel || product.category}${product.size ? " · Talla " + product.size : ""}${product.condition ? " · " + product.condition : ""}</small></div>
-      <span class="line-price">${money(product.price * quantity)}</span>
+      <img class="cart-product-image" src="${product.image}" alt="${product.name}" loading="lazy">
+      <div class="cart-product-copy"><strong>${product.name}</strong><small>${product.categoryLabel || product.category}${product.size ? " · Talla " + product.size : ""}${product.condition ? " · " + product.condition : ""}</small><span class="line-price">${money(product.price * quantity)}</span></div>
       <div class="qty-controls"><button data-qty="-1" data-id="${product.id}" aria-label="Quitar uno">−</button><b>${quantity}</b><button data-qty="1" data-id="${product.id}" aria-label="Añadir uno" ${product.stock !== null && quantity >= product.stock ? "disabled" : ""}>+</button><button class="remove-item" data-remove="${product.id}">Eliminar</button></div>
     </div>`).join("") : '<p class="cart-empty">Tu bolsa está esperando un buen hallazgo.</p>';
   $("#cart-total").textContent = money(lines.reduce((sum,line) => sum + line.product.price * line.quantity, 0));
