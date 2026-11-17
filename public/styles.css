@@ -128,3 +128,11 @@
 .cart-row .qty-controls{gap:6px}
 .cart-row .qty-controls button{width:23px;height:23px}
 @media(max-width:380px){.cart-row{grid-template-columns:48px minmax(0,1fr)}.cart-product-image{width:48px;height:52px}}
+
+
+/* Acceso flotante a Mi bolsa shopping */
+.floating-cart{position:fixed;right:22px;bottom:24px;z-index:24;width:62px;height:62px;border:0;border-radius:50%;display:flex;align-items:center;justify-content:center;background:var(--lime);color:var(--ink);box-shadow:0 8px 24px #24252b30;cursor:pointer;transition:transform .2s,box-shadow .2s}
+.floating-cart:hover{transform:translateY(-3px);box-shadow:0 12px 28px #24252b3d}
+.floating-cart-icon{font-size:27px;line-height:1}
+.floating-cart b{position:absolute;top:-4px;right:-3px;min-width:23px;height:23px;padding:0 5px;border-radius:20px;display:grid;place-items:center;background:var(--purple);color:#fff;border:2px solid var(--paper);font-size:10px;font-weight:800}
+@media(max-width:680px){.floating-cart{right:15px;bottom:17px;width:56px;height:56px}.floating-cart-icon{font-size:25px}}
