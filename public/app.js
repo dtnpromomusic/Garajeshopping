@@ -293,9 +293,9 @@ function showProduct(id) {
     <img class="detail-product-image" src="${product.image}" alt="${product.name}. Selecciona la imagen para ampliarla" title="Pulsa para ampliar la fotografía">
     <span class="stock-tag">${product.unique ? "PIEZA ÚNICA · 1 DISPONIBLE" : product.stock !== null ? product.stock + " DISPONIBLES" : "DISPONIBILIDAD POR CONFIRMAR"}</span>
     <div class="detail-facts">
-      ${product.condition ? `<div><small>Estado de conservación</small><strong>${product.condition}</strong></div>` : ""}
+      <div><small>Estado de conservación</small><strong>${product.condition || "Por confirmar"}</strong></div>
       ${product.size ? `<div><small>Talla</small><strong>${product.size}</strong></div>` : ""}
-      ${product.measurements ? `<div><small>Medidas</small><strong>${product.measurements}</strong></div>` : ""}
+      <div><small>Medidas</small><strong>${product.measurements || "No especificadas"}</strong></div>
       ${product.material ? `<div><small>Material</small><strong>${product.material}</strong></div>` : ""}
       <div><small>Disponibilidad</small><strong>${product.stock === null ? "Por confirmar" : product.stock + (product.stock === 1 ? " unidad disponible" : " unidades disponibles")}</strong></div>
     </div>
@@ -306,8 +306,6 @@ function showProduct(id) {
   detail.setAttribute("aria-hidden","false");
 }
 $("#product-detail-backdrop").addEventListener("click", event => {
-  const zoomedImage = $("#product-detail-content .detail-product-image.image-zoomed");
-  if (zoomedImage && event.target === zoomedImage) { zoomedImage.classList.remove("image-zoomed"); return; }
   if (event.target.id === "product-detail-backdrop" || event.target.closest(".product-detail-close")) {
     $("#product-detail-content .detail-product-image")?.classList.remove("image-zoomed");
     $("#product-detail-backdrop").classList.remove("open");
