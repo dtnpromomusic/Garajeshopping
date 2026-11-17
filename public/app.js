@@ -51,12 +51,15 @@ $("#year").textContent = new Date().getFullYear();
 function selectCategory(category, scroll = false) {
   activeCategory = category;
   selectionSection.hidden = false;
-  categoryResults.hidden = category === "Todos";
+  selectionSection.classList.add("is-open");
+  selectionSection.setAttribute("aria-hidden", "false");
+  document.body.classList.add("category-panel-open");
+  categoryResults.hidden = false;
   filters.forEach(button => button.classList.toggle("active", button.dataset.filter === category));
   sidebarCategories.forEach(button => button.classList.toggle("active", button.dataset.sidebarCategory === category));
   selectionTitle.textContent = category === "Todos" ? "Todas las categorías" : category;
   renderProducts();
-  if (scroll && category !== "Todos") selectionSection.scrollIntoView({behavior:"smooth",block:"start"});
+  if (scroll) selectionSection.scrollIntoView({behavior:"smooth",block:"start"});
 }
 function renderProducts() {
   const visible = products.filter(product => activeCategory === "Todos" || product.category === activeCategory);
@@ -178,7 +181,7 @@ document.addEventListener("keydown", event => {
     $("#product-detail-backdrop").setAttribute("aria-hidden","true");
   }
 });
-selectionSection.hidden = false;
-categoryResults.hidden = true;
+selectionSection.hidden = true;
+categoryResults.hidden = false;
 renderProducts();
 renderCart();
