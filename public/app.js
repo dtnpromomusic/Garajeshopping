@@ -42,7 +42,65 @@ function setCartOpen(open) {
   document.body.classList.toggle("cart-open", open);
   drawer.setAttribute("aria-hidden", String(!open));
 }
-$("#open-cart").addEventListener("click", () => setCartOpen(true));\n$("#floating-cart").addEventListener("click", () => setCartOpen(true));
+$("#open-cart").addEventListener("click", () => setCartOpen(true));
+
+const floatingCart = $("#floating-cart");
+let floatingCartMoved = false;
+let floatingCartDrag = null;
+const FLOATING_CART_POSITION_KEY = "garaje-shopping-floating-cart-position";
+try {
+  const savedPosition = JSON.parse(localStorage.getItem(FLOATING_CART_POSITION_KEY) || "null");
+  if (savedPosition && Number.isFinite(savedPosition.left) && Number.isFinite(savedPosition.top)) {
+    floatingCart.style.left = Math.max(0, Math.min(savedPosition.left, window.innerWidth - floatingCart.offsetWidth)) + "px";
+    floatingCart.style.top = Math.max(0, Math.min(savedPosition.top, window.innerHeight - floatingCart.offsetHeight)) + "px";
+    floatingCart.style.right = "auto";
+    floatingCart.style.bottom = "auto";
+  }
+} catch {}
+floatingCart.addEventListener("pointerdown", event => {
+  if (event.button !== undefined && event.button !== 0) return;
+  const rect = floatingCart.getBoundingClientRect();
+  floatingCartDrag = {pointerId:event.pointerId,startX:event.clientX,startY:event.clientY,left:rect.left,top:rect.top,moved:false};
+  floatingCart.setPointerCapture(event.pointerId);
+});
+floatingCart.addEventListener("pointermove", event => {
+  if (!floatingCartDrag || floatingCartDrag.pointerId !== event.pointerId) return;
+  const dx = event.clientX - floatingCartDrag.startX;
+  const dy = event.clientY - floatingCartDrag.startY;
+  if (!floatingCartDrag.moved && Math.hypot(dx,dy) < 6) return;
+  floatingCartDrag.moved = true;
+  floatingCartMoved = true;
+  const left = Math.max(0, Math.min(floatingCartDrag.left + dx, window.innerWidth - floatingCart.offsetWidth));
+  const top = Math.max(0, Math.min(floatingCartDrag.top + dy, window.innerHeight - floatingCart.offsetHeight));
+  floatingCart.style.left = left + "px";
+  floatingCart.style.top = top + "px";
+  floatingCart.style.right = "auto";
+  floatingCart.style.bottom = "auto";
+});
+function finishFloatingCartDrag(event) {
+  if (!floatingCartDrag || floatingCartDrag.pointerId !== event.pointerId) return;
+  if (floatingCartDrag.moved) {
+    try {
+      const rect = floatingCart.getBoundingClientRect();
+      localStorage.setItem(FLOATING_CART_POSITION_KEY, JSON.stringify({left:rect.left,top:rect.top}));
+    } catch {}
+    setTimeout(() => { floatingCartMoved = false; }, 0);
+  }
+  floatingCartDrag = null;
+}
+floatingCart.addEventListener("pointerup", finishFloatingCartDrag);
+floatingCart.addEventListener("pointercancel", finishFloatingCartDrag);
+floatingCart.addEventListener("click", event => {
+  if (floatingCartMoved) { event.preventDefault(); event.stopPropagation(); floatingCartMoved = false; return; }
+  setCartOpen(true);
+});
+window.addEventListener("resize", () => {
+  if (floatingCart.style.left) {
+    const rect = floatingCart.getBoundingClientRect();
+    floatingCart.style.left = Math.max(0, Math.min(rect.left, window.innerWidth - floatingCart.offsetWidth)) + "px";
+    floatingCart.style.top = Math.max(0, Math.min(rect.top, window.innerHeight - floatingCart.offsetHeight)) + "px";
+  }
+});
 $("#close-cart").addEventListener("click", () => setCartOpen(false));
 $("#drawer-backdrop").addEventListener("click", () => setCartOpen(false));
 $("#year").textContent = new Date().getFullYear();
@@ -131,7 +189,8 @@ function changeQuantity(id, delta) {
 }
 function renderCart() {
   const count = cart.reduce((sum,row) => sum + row.quantity, 0);
-  $("#cart-count").textContent = count;\n  $("#floating-cart-count").textContent = count;
+  $("#cart-count").textContent = count;
+  $("#floating-cart-count").textContent = count;
   const lines = cart.map(row => {
     const product = products.find(item => item.id === row.id);
     return product ? {product,quantity:row.quantity} : null;
